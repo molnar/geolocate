@@ -1,0 +1,41 @@
+/******************************************************************/
+/* Autocomplete                                                   */
+/******************************************************************/
+
+.suggest-me{
+  width:100%;
+  padding:0;
+  border:1px solid #dedede;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin-left: 5%;
+}
+.dropdown-menu>li>a{
+    word-wrap: break-word;
+    white-space: normal;
+/*    color:#757575;*/
+  color:#bcc0c2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 12px;
+}
+.dropdown-menu>li:last-child>a{
+  border-bottom: none;
+}
+.label-category{
+  background:#dedede;
+  color:#757575;
+  font-weight: normal;
+  margin-bottom:0;
+  padding:5px 15px 5px 15px;
+  width:100%;
+}
+.ui-match{ 
+  color:#8FC320;
+  font-weight: bold;
+}
+
+/******************************************************************/
+/* End Autocomplete                                               */
+/******************************************************************/
