@@ -67,7 +67,7 @@ directive('geocode', function($rootScope) {
         '          <a href="javascript:void(0);" ng-click="selectMe(choice, $event)"></a>{{choice.label}}</li>' +
         '     </ul>' +
         '</div>',
-        controller: function($scope, $rootScope, $element, $attrs) {
+        controller: function($scope, $rootScope, $element, $attrs, doSearch) {
             if($rootScope.searchTermItem!= 'null')$scope.searchTerm =  $rootScope.searchTermItem;
 
             //console.log('inside controller');
@@ -137,6 +137,9 @@ directive('geocode', function($rootScope) {
                         $scope.searchTerm = $scope.lastSearchTerm = enterKeySearchObj.label;
                         $rootScope.searchTermItem = enterKeySearchObj.label;
                     }
+                    doSearch.async($rootScope.searchTermItem).then(function(d){
+                        console.log(d.data.locations[0].feature.geometry);
+                    });
                 }
                 else{
                     //to mimic the dropdown choices
@@ -148,6 +151,7 @@ directive('geocode', function($rootScope) {
                     $scope.selectedItem = enterKeySearchObj; 
                     $scope.searchTerm = $scope.lastSearchTerm = enterKeySearchObj.label;
                     $rootScope.searchTermItem = enterKeySearchObj.label;
+                   
                 } 
 
                 
@@ -224,4 +228,15 @@ directive('geocode', function($rootScope) {
         });
         scope.$eval(attrs.focused + '=true')
     }
+}).
+factory('doSearch', function($http){
+    var doSearch = {
+      async: function (searchtext) {
+        var promise = $http.jsonp("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find?text="+searchtext+"&f=json&callback=JSON_CALLBACK").then(function(response){
+          return (response);
+        });
+        return promise;
+      }
+    }
+    return doSearch;
 });
