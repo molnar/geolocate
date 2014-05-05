@@ -19,22 +19,23 @@ factory('Serv', function($http, $resource) {
             var retArray, dataToPost, config;
             var masterArray = [];            
             dataToPost = {
-                f:'jsonp',
-                term: request.term,
-                maxRows: 3,                
+                f:'json',
+                location: '-122.67642974853516,45.5164233764112',
+                text: request.term,                       
                 callback: 'JSON_CALLBACK'                             
             };             
             config = {
                 method: 'JSONP',
-                url: 'http://webqa.csc.noaa.gov/dataservices/geoESPIS/AutoComplete',
+                url: 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest',
                 params: dataToPost
             };   
             $http.jsonp(config.url, config).
             success(function(data, status, headers, config) {               
-                retArray = data.AutoComplete[0].Terms.map(function(item) {                                 
+                retArray = data.suggestions.map(function(item) {                                 
                     return {
-                        label: item.Term,
-                        value: item.Term
+                        label: item.text,
+                        value: item.text,
+                        magicKey: item.magicKey
                     }
                 }); 
                 if(retArray[0].label != 'undefined')response(retArray);              
