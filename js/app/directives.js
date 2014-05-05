@@ -11,7 +11,7 @@ angular.module('myApp.directives', []).
       elm.text(version);
     };
   }]).
-directive('myAutocompleteText', function($rootScope) {
+directive('geocode', function($rootScope) {
     return {
         restrict: 'E',
         replace: true,

@@ -80,12 +80,14 @@
          <div class="col-md-6">
              <div class="input-group" ng-controller="autocompleteCtrl">
                <span class="input-group-addon">Find</span>
-               <my-Autocomplete-Text remote-data="Wrapper.AutoComplete(request, response)" 
+               
+               <geocode remote-data="Wrapper.AutoComplete(request, response)" 
                            min-input="2" restrict="true" 
                            selected-item="selectedItem" 
-                           placeholder="ex: Marine Mammals"
+                           placeholder="ex: Charleston, SC"
                            >
-               </my-Autocomplete-Text>
+               </geocode>
+
              </span>
              </div>
            </div>
