@@ -35,6 +35,12 @@
   color:#8FC320;
   font-weight: bold;
 }
+.dropdown-menu{
+  top:40px;
+}
+.activeLi{
+  background-color: pink;
+}
 
 /******************************************************************/
 /* End Autocomplete                                               */

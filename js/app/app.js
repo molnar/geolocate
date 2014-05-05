@@ -30,21 +30,18 @@ factory('Serv', function($http, $resource) {
                 params: dataToPost
             };   
             $http.jsonp(config.url, config).
-            success(function(data, status, headers, config) {
-                console.log(data)
-                retArray = data.AutoComplete[0].Terms.map(function(item) {                    
+            success(function(data, status, headers, config) {               
+                retArray = data.AutoComplete[0].Terms.map(function(item) {                                 
                     return {
                         label: item.Term,
                         value: item.Term
                     }
                 }); 
-                if(retArray[0].label != 'undefined')response(retArray);
+                if(retArray[0].label != 'undefined')response(retArray);              
             }).
             error(function(data, status, headers, config) {
                 response([]);
             });
-            
-
         }
         
     }
@@ -66,7 +63,7 @@ directive('geocode', function($rootScope) {
         '         tabindex="1" accesskey="s" class="input-medium search-query" focused="focused" ng-keyup="enterKeySearch($event, this.searchTerm)">' +
         '    <ul class="dropdown-menu ge-autosuggest">' +
         '         <li class="ge-autosuggest-label">Keywords <span class="ge-text-small">(About {{choices.length}} results)</span></li><li class="txtresults" ng-repeat="choice in choices | limitTo:3" ng-class="{activeLi: choice.label == activeLiTxt}">' +
-        '          <a href="javascript:void(0);" ng-click="selectMe(choice, $event)" ng-bind-html="\'{{choice.label}}\'></a></li>' +
+        '          <a href="javascript:void(0);" ng-click="selectMe(choice, $event)"></a>{{choice.label}}</li>' +
         '     </ul>' +
         '</div>',
         controller: function($scope, $rootScope, $element, $attrs) {
