@@ -43,8 +43,7 @@ factory('Serv', function($http, $resource) {
             error(function(data, status, headers, config) {
                 response([]);
             });
-        }
-        
+        }        
     }
 }).
 directive('geocode', function($rootScope) {
@@ -60,10 +59,10 @@ directive('geocode', function($rootScope) {
         },
         template: '<div class="dropdown search" ' +
         '     ng-class="{open: focused && choices.length>0}">' +
-        '     <input type="text" class="form-control txttextSearch" ng-model="searchTerm" placeholder="{{placeholder}}"   ng-keydown="arrowBttnSrch($event)"' +
+        '     <input type="text" class="form-control txttextSearch" ng-model="searchTerm" placeholder="{{placeholder}}"  ng-keydown="arrowBttnSrch($event)"' +
         '         tabindex="1" accesskey="s" class="input-medium search-query" focused="focused" ng-keyup="enterKeySearch($event, this.searchTerm)">' +
         '    <ul class="dropdown-menu ge-autosuggest">' +
-        '         <li class="ge-autosuggest-label">Keywords <span class="ge-text-small">(About {{choices.length}} results)</span></li><li class="txtresults" ng-repeat="choice in choices | limitTo:3" ng-class="{activeLi: choice.label == activeLiTxt}">' +
+        '         <li class="ge-autosuggest-label">Keywords <span class="ge-text-small">(About {{choices.length}} results)</span></li><li class="txtresults" ng-repeat="choice in choices | limitTo:10" ng-class="{activeLi: choice.label == activeLiTxt}">' +
         '          <a href="javascript:void(0);" ng-click="selectMe(choice, $event)"></a>{{choice.label}}</li>' +
         '     </ul>' +
         '</div>',
@@ -79,6 +78,9 @@ directive('geocode', function($rootScope) {
                 //fire the search
                 $rootScope.searchTermItem = choice.label;
                 //$rootScope.loadStudiesTxt();
+                doSearch.async($rootScope.searchTermItem).then(function(d){
+                    console.log(d.data.locations[0].feature.geometry);
+                });
             };
 
             $scope.arrowBttnSrch = function($event){
