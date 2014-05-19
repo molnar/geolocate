@@ -148,16 +148,11 @@ directive('geocode', function($rootScope) {
                     var enterKeySearchObj = {
                         value: inputVal,
                         label: inputVal
-                    }
-                    
+                    }                    
                     $scope.selectedItem = enterKeySearchObj; 
                     $scope.searchTerm = $scope.lastSearchTerm = enterKeySearchObj.label;
                     $rootScope.searchTermItem = enterKeySearchObj.label;
-                   
-                } 
-
-                
-               
+                }
             }
 
             $scope.UpdateSearch = function() {               
